@@ -12,7 +12,7 @@ public interface TimeoutScheduler {
     /**
      * Starts new task with given timeout time and callback.
      *
-     * @param millis timeout in milliseconds.
+     * @param millis   timeout in milliseconds.
      * @param callback {@link Runnable} which will be executed if specified amount of time will expire and there will be no stops.
      * @return ID of newly created task.
      */

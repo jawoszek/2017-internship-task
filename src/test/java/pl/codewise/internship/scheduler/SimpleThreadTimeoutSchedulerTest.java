@@ -110,15 +110,15 @@ public class SimpleThreadTimeoutSchedulerTest {
         timeoutScheduler.start(100, counter::increment);
         Thread.sleep(50);
         timeoutScheduler.stop(id2);
-        assertEquals(counter.getValue(),0);
+        assertEquals(counter.getValue(), 0);
         timeoutScheduler.start(20, counter::increment);
         id2 = timeoutScheduler.start(20, counter::increment);
         timeoutScheduler.start(1000, counter::increment);
         Thread.sleep(100);
         timeoutScheduler.stop(id2);
-        assertEquals(counter.getValue(),3);
+        assertEquals(counter.getValue(), 3);
         Thread.sleep(1000);
-        assertEquals(counter.getValue(),5);
+        assertEquals(counter.getValue(), 5);
     }
 
     @Test
@@ -126,9 +126,13 @@ public class SimpleThreadTimeoutSchedulerTest {
         final Counter counter = new Counter();
         timeoutScheduler.start(0, counter::increment);
         Thread.sleep(20);
-        assertEquals(counter.getValue(),1);
+        assertEquals(counter.getValue(), 1);
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void simpleTaskWithWrongTimeExceptionSchedulerTest() throws Exception {
+        timeoutScheduler.start(-1, null);
+    }
 
     private static class Counter {
         AtomicInteger atomicInteger = new AtomicInteger(0);
