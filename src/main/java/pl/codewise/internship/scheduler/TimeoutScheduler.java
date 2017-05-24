@@ -5,7 +5,7 @@ package pl.codewise.internship.scheduler;
  * It is not designed to inform user in any way about current situation except by callback or {@link #stop(long) stop} method.
  * Implementations can differ in some details (for example meaning of {@link #stop(long) stop} return value), so choice of specific TimeoutScheduler should be deeply considered.
  *
- * @author Kacper
+ * @author Kacper Jawoszek
  */
 public interface TimeoutScheduler {
 

@@ -11,7 +11,7 @@ import static org.junit.Assert.assertEquals;
  * I'm sorry for ugly tests with usage of real time, but I don't want to pollute interface or class with logic to create controllable time environment.
  * I guess if we want this implementation to work as expected in real time, then times given in tests below should be expected to work.
  *
- * @author Kacper
+ * @author Kacper Jawoszek
  */
 @SuppressWarnings("Duplicates")
 public class SimpleThreadTimeoutSchedulerTest {

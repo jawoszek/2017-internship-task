@@ -12,7 +12,7 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
  * Simple implementation of {@link TimeoutScheduler} interface.
  * More details about implementation can be found in method's documentation.
  *
- * @author Kacper
+ * @author Kacper Jawoszek
  */
 public class SimpleThreadTimeoutScheduler implements TimeoutScheduler {
     private Map<Long, SchedulerTask> taskMap = new HashMap<>();
@@ -63,6 +63,7 @@ public class SimpleThreadTimeoutScheduler implements TimeoutScheduler {
         return taskToStop != null && taskToStop.stopTask();
     }
 
+    // designed only to be used from within task itself
     private void removeTask(long id) {
         try {
             lock.writeLock().lock();
@@ -80,6 +81,7 @@ public class SimpleThreadTimeoutScheduler implements TimeoutScheduler {
         private long millis;
         private Runnable callback;
         private long timerID;
+        // ugly flags and lock - but were necessary for quick implementation of crucial thread-safe features
         private boolean interrupted = false;
         private boolean beforeCallback = true;
         private Lock stopLock = new ReentrantLock();
@@ -111,6 +113,7 @@ public class SimpleThreadTimeoutScheduler implements TimeoutScheduler {
             SimpleThreadTimeoutScheduler.this.removeTask(timerID);
         }
 
+        // stop task anyway and return true if before callback and lock is free
         boolean stopTask() {
             this.interrupt();
             try {
